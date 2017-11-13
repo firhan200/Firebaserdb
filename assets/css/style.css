@@ -20,7 +20,11 @@ body{font-family: monospace;background-color:#EEF0F5;}
    box-shadow: 2px 2px 4px #bdbdbd !important; 
 }
 
+#post-text{resize: none;}
+
 .comment{background-color: #F9F9F9;padding: 0px;border: 1px solid #e6e6e6;margin-top: -10px;}
 .post-comment{padding:10px 20px 10px 20px;}
 .input-comment{border-radius: 50px;}
-.comment-section{padding:5px;}
+.comment-section{padding:5px;width:100%;border:0px !important;background-color: transparent;resize: none;display:inline-block;
+  vertical-align:bottom;}
+.box-content{width:100%;border:0px !important;background-color: #fff;resize: none;}
