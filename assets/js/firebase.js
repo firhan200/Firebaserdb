@@ -1,6 +1,5 @@
 $(document).ready(function(){
-	var posts = [];
-
+	var posts = [];	
 	$(".post").focusin(function(){
 		$(this).addClass('post-active');
 		$(".post-box").addClass('post-box-active');
@@ -29,7 +28,8 @@ $(document).ready(function(){
 	    snapshot.forEach(function(childSnapshot){
 	  		var childKey = childSnapshot.key;
 	  		var childData = childSnapshot.val();
-	  		var post = "<div class='row'><div class='col-sm-8 col-md-6 col-lg-6 col-sm-offset-2 col-md-offset-3 col-lg-offset-3 box'><div class='box-title'><div class='row'><div class='col-xs-1' align='right'><span class='glyphicon glyphicon-user' style='margin-top:10px;''></span></div><div class='col-xs-11' align='left' style='padding:0'>Anonymous<div style='font-size:8pt;color:#BDBDBD'>"+childData.datetime+"</div></div></div></div><div class='box-content'>"+childData.post+"</div></div></div>";
+	  		var post_text = childData.post;
+	  		var post = "<div class='row'><div class='col-sm-8 col-md-6 col-lg-6 col-sm-offset-2 col-md-offset-3 col-lg-offset-3 box'><div class='box-title'><div class='row'><div class='col-xs-1' align='right'><span class='glyphicon glyphicon-user' style='margin-top:10px;''></span></div><div class='col-xs-11' align='left' style='padding:0'>Anonymous<div style='font-size:8pt;color:#BDBDBD'>"+childData.datetime+"</div></div></div></div><textarea class='box-content' disabled>"+post_text+"</textarea></div></div>";
 			var precomments = "<div class='row'><div class='col-sm-8 col-md-6 col-lg-6 col-sm-offset-2 col-md-offset-3 col-lg-offset-3 comment'><div class='post-comment'><div class='comment-area'>";
 			var comments = "";
 			var inputcomment = "</div><div class='row' style='margin-top:10px;'><div class='col-xs-10'><input type='text' id='"+childKey+"' class='input-comment form-control' placeholder='write comment' maxlength='160'></div><div class='col-xs-2'><button type='button' class='btn btn-primary btn-xs submit-comment' style='margin-top:5px;'>Submit</button></div></div></div></div></div>";
@@ -37,11 +37,17 @@ $(document).ready(function(){
 			//generate comments
 	  		database.ref('posts/'+childKey+'/comments').once('value', function(commentsSnapshot) {
 	  			commentsSnapshot.forEach(function(perCommentSnapshot){
-	  				comments += "<div class='comment-section'>"+perCommentSnapshot.val().comment+"</div><div style='font-size:8pt;color:#BDBDBD;border-bottom:1px solid #bdbdbd;margin-bottom:5px;'>"+perCommentSnapshot.val().datetime+"</div>";
+	  				comments += "<textarea class='comment-section' disabled>"+perCommentSnapshot.val().comment+"</textarea><div style='font-size:8pt;color:#BDBDBD;border-bottom:1px solid #bdbdbd;margin-bottom:5px;'>"+perCommentSnapshot.val().datetime+"</div>";
 	  			});		
 	  		});
 
-			$(".post-area").append(post+precomments+comments+inputcomment);
+			$(".post-area").append(post+precomments+comments+inputcomment);		
+			$('.box-content').each(function(){
+				$(this).height( $(this)[0].scrollHeight );
+			})	
+			$('.comment-section').each(function(){
+				$(this).height( $(this)[0].scrollHeight-10 );
+			})	
 	  	});			    
 	});
 
@@ -91,4 +97,6 @@ $(document).ready(function(){
 			});
 		});
 	}
+
+	autosize(document.querySelectorAll('textarea'));
 })
