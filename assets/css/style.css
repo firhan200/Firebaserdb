@@ -1,0 +1,26 @@
+body{font-family: monospace;background-color:#EEF0F5;}
+.box{
+    background-color: #fff;padding:15px;border-radius: 10px 10px 0px 0px;border: 1px solid #e6e6e6;
+    margin-top: 40px;
+}
+.box-title{
+    margin-bottom: 10px;
+}
+
+.post{
+    border: 0px;
+    box-shadow: 0px 0px 0px;
+}
+.post-active{
+    border: 0px;
+    box-shadow: 0px 0px 0px !important;
+}
+
+.post-box-active{
+   box-shadow: 2px 2px 4px #bdbdbd !important; 
+}
+
+.comment{background-color: #F9F9F9;padding: 0px;border: 1px solid #e6e6e6;margin-top: -10px;}
+.post-comment{padding:10px 20px 10px 20px;}
+.input-comment{border-radius: 50px;}
+.comment-section{padding:5px;}
